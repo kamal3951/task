@@ -6,12 +6,12 @@ import "hardhat/console.sol";
 
 contract LinearVesting {
     address owner;
-    IERC20 immutable TranchesL;
+    IERC20 immutable LinearV;
     uint256 deployDate;
 
     constructor() {
         owner = msg.sender;
-        TranchesL = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4);
+        LinearV = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4); //ROUTE Address
         deployDate = block.timestamp;
     }
 
@@ -64,7 +64,7 @@ contract LinearVesting {
             addressToInvestor[msg.sender].lastWithdrawl) /
             addressToInvestor[msg.sender].totalTimeForVesting;
 
-        TranchesL.transfer(sender, claimableTokens);
+        LinearV.transfer(sender, claimableTokens);
 
         addressToInvestor[sender].lastWithdrawl = block.timestamp;
     }

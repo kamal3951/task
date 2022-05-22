@@ -15,15 +15,19 @@ contract TranchesVesting {
     mapping(address => uint256) private investorToLastWithdrawl;
     mapping(address => uint256) private investorToX;
 
+    //Investor
     address payable investor1;
     uint256 x1;
 
-    //investors.push(investor1);
-
     constructor() {
         owner = msg.sender;
-        TranchesV = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4);
+        TranchesV = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4); //ROUTE Address
         deployDate = block.timestamp;
+
+        //init the investor1
+        investors.push(investor1);
+        investorToLastWithdrawl[investor1] = block.timestamp;
+        investorToX[investor1] = x1;
     }
 
     modifier onlyOwner() {
