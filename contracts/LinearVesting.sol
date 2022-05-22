@@ -9,12 +9,6 @@ contract LinearVesting {
     IERC20 immutable LinearV;
     uint256 deployDate;
 
-    constructor() {
-        owner = msg.sender;
-        LinearV = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4); //ROUTE Address
-        deployDate = block.timestamp;
-    }
-
     struct Investor {
         address payable investor;
         uint256 totalAmount;
@@ -24,6 +18,27 @@ contract LinearVesting {
     }
 
     mapping(address => Investor) addressToInvestor;
+
+    //investor
+    address payable _investor1;
+    uint256 _x1;
+    uint256 _totalTimeForVesting1;
+
+    constructor() {
+        owner = msg.sender;
+        LinearV = IERC20(0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4); //ROUTE Address
+        deployDate = block.timestamp;
+
+        Investor memory Investor1 = Investor(
+            _investor1,
+            _x1,
+            block.timestamp,
+            _totalTimeForVesting1,
+            block.timestamp
+        );
+
+        addressToInvestor[_investor1] = Investor1;
+    }
 
     modifier onlyOwner() {
         require(
