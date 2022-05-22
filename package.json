@@ -19,7 +19,8 @@
   "homepage": "https://github.com/kamal3951/task#readme",
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@openzeppelin/contracts": "^4.6.0"
+    "@openzeppelin/contracts": "^4.6.0",
+    "@symblox/hardhat-dotenv": "^1.0.0"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
