@@ -33,6 +33,10 @@ contract LinearVesting {
         _;
     }
 
+    event investorAdded(address payable investor);
+
+    event tokensClaimed(address investor);
+
     function whoIsOwner() public view returns (address) {
         return owner;
     }
@@ -52,6 +56,8 @@ contract LinearVesting {
         );
 
         addressToInvestor[_investor] = _Investor;
+
+        emit investorAdded(_investor);
     }
 
     function claimTokens() public {
@@ -67,5 +73,7 @@ contract LinearVesting {
         LinearV.transfer(sender, claimableTokens);
 
         addressToInvestor[sender].lastWithdrawl = block.timestamp;
+
+        emit tokensClaimed(msg.sender);
     }
 }

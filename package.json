@@ -20,6 +20,7 @@
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/test-helpers": "^0.5.15",
     "@symblox/hardhat-dotenv": "^1.0.0"
   },
   "devDependencies": {

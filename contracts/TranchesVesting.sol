@@ -38,18 +38,28 @@ contract TranchesVesting {
         _;
     }
 
+    event investorAdded(
+        address payable investor,
+        uint256 startingDate,
+        uint256 startingAmount
+    );
+
+    event tokensClaimed(address payable investor, uint256 tokensClaimed);
+
     function whoIsOwner() public view returns (address) {
         return owner;
     }
 
     //Owner can add investor on his behalf
-    function addInvestor(address _investor) public payable onlyOwner {
+    function addInvestor(address payable _investor) public payable onlyOwner {
         investors.push(_investor);
         investorToLastWithdrawl[_investor] = block.timestamp;
         investorToX[msg.sender] = msg.value;
+
+        emit investorAdded(_investor, block.timestamp, msg.value);
     }
 
-    function claimTokens() public returns (bool) {
+    function claimTokens() public {
         uint256 lastWithdrawl = investorToLastWithdrawl[msg.sender];
         require(
             investorToX[msg.sender] > 0 &&
@@ -66,7 +76,7 @@ contract TranchesVesting {
             revert TranchesVesting__TransactionFailed();
         }
 
-        return done;
+        emit tokensClaimed(user, investorToX[msg.sender] / 4);
     }
 
     //Getter functions
